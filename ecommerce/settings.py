@@ -1,7 +1,8 @@
 import os
+import dj_database_url
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))  #diz respeito ao settings.py
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -10,7 +11,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '!hyemn$l08jerj%(!=nz)0fogw7t1kvl0z%2^+*(x2+itopvve'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -94,3 +95,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static') #arquivo para deixar o site dinâ
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #STATICFILES_DIRS=[ os.path.join(BASE_DIR,"static"), ] 
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+ALLOWED_HOSTS = ['*']
+
+
+try:
+	from .local_settings import * #importando todo o arquivo do local_settings para sobrescrever este settings.
+except ImportError:
+	pass
