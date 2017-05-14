@@ -25,7 +25,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    #bibliotecas
+    'widget_tweaks',
+    #apps
     'sitio',
     'catalogo',
 )
@@ -124,6 +126,13 @@ DATABASES['default'].update(db_from_env)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ALLOWED_HOSTS = ['*']
+
+#E-MAILS
+EMAIL_HOST = ''
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_FROM_EMAIL = 'admin@ecommerce.com' #email padrão
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #Configuracao para imprimir email no console (apenas para desenvolvimento)
 
 try:
 	from .local_settings import * #importando todo o arquivo do local_settings para sobrescrever este settings. (variavel de ambiente)

@@ -1,6 +1,8 @@
 
+
 from django.test import TestCase, Client
-#from django.sitio.urlresolvers import reverse
+from django.core.urlresolvers import reverse
+from django.core import mail
 
 class IndexViewTestCase(TestCase): #Classe de teste para views
 	
@@ -21,3 +23,30 @@ class IndexViewTestCase(TestCase): #Classe de teste para views
 		response = client.get('/') 
 		self.assertTemplateUsed(response, 'index.html') #teste para verificar se o usuario esta usando o template index.html
 
+#Testes do formulario de contato
+class ContactViewTestCase(TestCase):
+	def setUp(self):
+		self.client = Client()
+		self.url = reverse('contact')
+
+	#Teste do template e do cliente(navegador)
+	def test_view_ok(self):
+		response = self.client.get(self.url)
+		self.assertEquals(response.status_code, 200)
+		self.assertTemplateUsed(response, 'contact.html')
+
+	#Teste do formulario (se houve erro ou nao)
+	def test_form(self):
+		data = {'name': '', 'email': '', 'message': ''}
+		response = self.client.post(self.url, data)
+		self.assertFormError(response, 'form', 'name', 'Este campo é obrigatório.')
+		self.assertFormError(response, 'form', 'email', 'Este campo é obrigatório.')
+		self.assertFormError(response, 'form', 'message', 'Este campo é obrigatório.')
+
+	#teste de envio de e-mail
+	def test_form_ok(self):
+		data = {'name': 'test', 'email': 'test@test.com', 'message': 'test'}
+		response = self.client.post(self.url, data)
+		self.assertTrue(response.context['success'])
+		self.assertEquals(len(mail.outbox), 1) #se o email foi enviado é testado aqui
+		#self.assertEquals(len(mail.outbox[0].subject, 'Contato do seu site')) #teste para ver se o assunto do email é o mesmo

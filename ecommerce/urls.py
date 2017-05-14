@@ -17,9 +17,11 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 from sitio import views
+from catalogo import views as views_catalogo
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^catalogo/', include('catalogo.urls', namespace='catalogo')), #pagina de listagem dos produtos na app de catalogo
+    url(r'^contato/$', views.contact, name='contact'), #pagina de listagem dos produtos na app de catalogo
     url(r'^admin/', admin.site.urls), 
 ]
