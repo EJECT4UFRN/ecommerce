@@ -35,6 +35,20 @@ class ContactViewTestCase(TestCase):
 		self.assertEquals(response.status_code, 200)
 		self.assertTemplateUsed(response, 'contact.html')
 
+	#Teste de páginas (paginação)
+#	def test_context(self):
+#		response = self.client.get(self.url)
+#		self.assertTrue('products' in response.context)
+#		product_list = response.context['products']
+#		self.assertEquals(product_list.count(), 3)
+#		paginator = response.context['paginator']
+#		self.assertEquals(paginator.num_pages, 4)
+
+	#Teste de página nao existir, devido a paginação
+#	def test_page_not_found(self):
+#		response = self.client.get('{}?page=5'.format(self.url))
+#		self.assertEquals(response.status_code, 404)
+
 	#Teste do formulario (se houve erro ou nao)
 	def test_form(self):
 		data = {'name': '', 'email': '', 'message': ''}
