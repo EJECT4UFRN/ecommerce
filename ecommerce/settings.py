@@ -11,7 +11,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))  #diz respeito ao sett
 SECRET_KEY = '!hyemn$l08jerj%(!=nz)0fogw7t1kvl0z%2^+*(x2+itopvve'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -25,7 +25,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'sitio',
+    'catalogo',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -52,6 +54,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                #aplicações de contextos
+               'catalogo.context_processors.categories',
+               'catalogo.context_processors.products',
             ],
         },
     },
@@ -73,6 +79,22 @@ DATABASES = {
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
+
+#Funções para validação de cadastros
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
 
 LANGUAGE_CODE = 'pt-br'
 
@@ -103,8 +125,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ALLOWED_HOSTS = ['*']
 
-
 try:
-	from .local_settings import * #importando todo o arquivo do local_settings para sobrescrever este settings.
+	from .local_settings import * #importando todo o arquivo do local_settings para sobrescrever este settings. (variavel de ambiente)
 except ImportError:
 	pass

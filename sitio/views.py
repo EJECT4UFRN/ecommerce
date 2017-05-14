@@ -1,14 +1,5 @@
 from django.shortcuts import render
+#from catalogo.models import Category, Product
 
 def index(request):
-	context = {
-		'title': 'Django E-Commerce'
-	}
-	return render(request, 'index.html', context)
-
-def product_list(request):
-    return render(request, 'product_list.html')
-
-
-def product(request):
-		return render(request, 'product.html')
+	return render(request, 'index.html')
