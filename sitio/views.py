@@ -1,9 +1,11 @@
 from django.shortcuts import render
-#from catalogo.models import Category, Product
+from django.core.urlresolvers import reverse_lazy
 from .forms import ContactForm
 from django.core.mail import send_mail
 from django.conf import settings
-from django.views.generic import View, TemplateView
+from django.views.generic import View, TemplateView, CreateView
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import get_user_model
 
 #Poderíamos criar uma função para cada página, ou utilizarmos classes based on views!
 #def index(request):
@@ -11,6 +13,9 @@ from django.views.generic import View, TemplateView
 
 #Class based views (para maior reutilização de códigos, transformamos uma função em uma classe)
 #TemplateView já é oferecido pelo django!!!
+
+User = get_user_model()
+
 class IndexView(TemplateView):
     template_name = 'index.html'
 
@@ -32,3 +37,12 @@ def contact(request):
 		'success': success
 	}
 	return render(request, 'contact.html', context)
+
+#Classe view para criação de usuário
+class RegisterView(CreateView):
+	form_class = UserCreationForm
+	template_name = 'register.html'
+	model = User
+	success_url = reverse_lazy('index') #o reverse_lazy evitaria um erro do reverse !
+
+register = RegisterView.as_view()

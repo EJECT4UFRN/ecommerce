@@ -134,6 +134,10 @@ EMAIL_HOST_PASSWORD = ''
 EMAIL_FROM_EMAIL = 'admin@ecommerce.com' #email padrão
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #Configuracao para imprimir email no console (apenas para desenvolvimento)
 
+#AUTENTICAÇÃO DE URUÁRIOS
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'index'  #depois que logar, irá para pagina index
+
 try:
 	from .local_settings import * #importando todo o arquivo do local_settings para sobrescrever este settings. (variavel de ambiente)
 except ImportError:
