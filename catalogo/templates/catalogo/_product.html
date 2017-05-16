@@ -1,0 +1,13 @@
+{% comment %} Apenas para ter maior reutilização de código {% endcomment %}
+<div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+            <a href="{{ produc.get_absolute_url }}">
+                <img src="http://placehold.it/350x250" alt="" />
+            </a>
+            <div class="caption">
+                <h3>{{ produc.name }} </h3>
+                <p> {{ produc.description }}</p>
+                <p><a href="{% url 'checkout:create_cartitem' produc.slug %}" class="btn btn-success" role="button">Add ao carrinho</a> <a href="{{ produc.get_absolute_url }}" class="btn btn-default" role="button">Ver</a></p>
+            </div>
+        </div>
+    </div>
