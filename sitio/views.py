@@ -6,6 +6,8 @@ from django.conf import settings
 from django.views.generic import View, TemplateView, CreateView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
+from django.contrib import messages
+
 
 #Poderíamos criar uma função para cada página, ou utilizarmos classes based on views!
 #def index(request):
@@ -24,18 +26,16 @@ index = IndexView.as_view()
 
 def contact(request):
 	success = False
-	if request.method == 'POST':
-		form = ContactForm(request.POST or None) #Se não for POST, passa None, ou seja, o mesmo que nada!
-		if form.is_valid():
-			form.send_mail()
-			success = True
-	else:
-		form = ContactForm()
-
+	form = ContactForm(request.POST or None)
+	if form.is_valid():
+		form.send_mail()
+		success = True
+	elif request.method == 'POST':
+		messages.error(request, 'Formulário inválido')
 	context = {
-		'form': form,
-		'success': success
-	}
+        'form': form,
+        'success': success
+    }
 	return render(request, 'contact.html', context)
 
 #Classe view para criação de usuário

@@ -28,6 +28,8 @@ INSTALLED_APPS = (
     #bibliotecas
     'widget_tweaks',
     #apps
+    #'accounts' #aplicação de usuários customizados
+    'checkout', #app do carrinho de compras
     'sitio',
     'catalogo',
 )
@@ -137,6 +139,17 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #Configuracao p
 #AUTENTICAÇÃO DE URUÁRIOS
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'index'  #depois que logar, irá para pagina index
+#AUTH_USER_MODEL = 'accounts.User'
+
+# Messages
+from django.contrib.messages import constants as messages_constants
+MESSAGE_TAGS = {
+    messages_constants.DEBUG: 'debug',
+    messages_constants.INFO: 'info',
+    messages_constants.SUCCESS: 'success',
+    messages_constants.WARNING: 'warning',
+    messages_constants.ERROR: 'danger', #Colocamos danger, devido a uma div do bootstrap
+}
 
 try:
 	from .local_settings import * #importando todo o arquivo do local_settings para sobrescrever este settings. (variavel de ambiente)
