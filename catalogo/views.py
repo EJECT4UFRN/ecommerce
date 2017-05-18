@@ -9,7 +9,6 @@ class ProductListView(generic.ListView):
 	template_name = 'catalogo/product_list.html'
 	paginate_by = 3 #sistema de paginação do django (caso você queira ter mais páginas para listagem de algo)
 					#Nesse caso, existiriam apenas 3 produtos por página!
-product_list = ProductListView.as_view()
 
 #Função para impressão de produtos
 #def product_list(request):
@@ -40,11 +39,12 @@ class CategoryListView(generic.ListView):
 	template_name = 'catalogo/category.html'
 	paginate_by = 3
 
-category = CategoryListView.as_view()
-
 def product(request,slug):
 	product = Product.objects.get(slug=slug)
 	context = {
 		'product': product
 	}
 	return render(request, 'catalogo/product.html', context)
+
+product_list = ProductListView.as_view()
+category = CategoryListView.as_view()
