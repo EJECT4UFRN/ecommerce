@@ -32,3 +32,11 @@ class CartItem(models.Model):
 		return '{} [{}]'.format(self.product, self.quantity)
 
 
+#Função de disparo de sinais (Deletar objeto com quantidade=0)
+def post_save_cart_item(instance, **kwargs):
+	if instance.quantity < 1:
+		instance.delete()
+
+models.signals.post_save.connect(
+	post_save_cart_item, sender=CartItem, dispatch_uid='post_save_cart_item'
+)
