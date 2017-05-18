@@ -1,0 +1,13 @@
+FORMSET - FORMULÁRIO ASSOCIADO A UM MODELO
+FORMSET PARA A APLICAÇÃO DO CARRINHO DE COMPRAS:
+
+from checkout.models import CartItem (importar a classe do modelo da aplicação checkout)
+from django.forms import modelformset_factory (função de criação de classe dinâmica)
+CartItemFormSet = modelformset_factory(CartItem, fields=['quantity'], extra=0) (formar formulario com um campo alterável, quantidade)
+formset = CartItemFormSet(queryset=CartItem.objects.all())
+
+Se dermos um print(formset), o shell exibirá tags de formulários!!!
+
+**OBS
+CartItemFormSet = modelformset_factory(CartItem, fields=['quantity'], extra=0, can_delete=True)
+- O can_delete adicionaria um campo extra para remover um objeto do carrinho=
