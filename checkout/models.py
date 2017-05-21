@@ -44,6 +44,7 @@ class Order(models.Model):
 
 	#Opções de pagamento
 	PAYMENT_OPTION_CHOICES = (
+		('deposit', 'Depósito'),
 		('pagseguro', 'PagSeguro'),
 		('paypal', 'Paypal'),
 	)
@@ -53,7 +54,7 @@ class Order(models.Model):
 		'Situação', choices=STATUS_CODE, default = 0, blank = True
 	) 
 	payment_option = models.CharField(
-		'Opção de pagamento', choices=PAYMENT_OPTION_CHOICES, max_length=20
+		'Opção de pagamento', choices=PAYMENT_OPTION_CHOICES, max_length=20, default='deposit'
 	)
 
 	created = models.DateTimeField('Criado em ', auto_now_add=True)
@@ -65,6 +66,18 @@ class Order(models.Model):
 
 	def __str__(self):
 		return 'Pedido #{}'.format(self.pk)
+
+
+class OrderManager(models.Manager):
+
+	def create_order(self, user, cart_items):
+		order = self.create(user=user)
+		for cart_item in cart_items:
+			ordem_item = OrderItem.objects.create(
+				order=order, quantity=cart_item.quantity, product=cart_item.product,
+				price=cart_item.price
+			)
+		return order
 
 
 #Classe para exibição dos itens dos pedidos
