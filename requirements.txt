@@ -23,3 +23,4 @@ typing==3.6.1
 wcwidth==0.1.7
 win-unicode-console==0.5
 setuptools==1.0
+whitenoise==3.2
