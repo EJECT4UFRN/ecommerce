@@ -28,7 +28,7 @@ INSTALLED_APPS = (
     #bibliotecas
     'widget_tweaks',
     #apps
-    #'accounts' #aplicação de usuários customizados
+    'accounts', #aplicação de usuários customizados
     'checkout', #app do carrinho de compras
     'sitio',
     'catalogo',
@@ -141,7 +141,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #Configuracao p
 #AUTENTICAÇÃO DE URUÁRIOS
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'index'  #depois que logar, irá para pagina index
-#AUTH_USER_MODEL = 'accounts.User'
+LOGOUT_URL = 'logout'
+AUTH_USER_MODEL = 'accounts.User'
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'accounts.backends.ModelBackend'
+)
 
 # Messages
 from django.contrib.messages import constants as messages_constants

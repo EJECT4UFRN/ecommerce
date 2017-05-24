@@ -39,10 +39,10 @@ def contact(request):
 	return render(request, 'contact.html', context)
 
 #Classe view para criação de usuário
-class RegisterView(CreateView):
-	form_class = UserCreationForm
-	template_name = 'register.html'
-	model = User
-	success_url = reverse_lazy('index') #o reverse_lazy evitaria um erro do reverse !
+#class RegisterView(CreateView):
+#	form_class = UserCreationForm
+#	template_name = 'register.html'
+#	model = User
+#	success_url = reverse_lazy('index') #o reverse_lazy evitaria um erro do reverse !
 
-register = RegisterView.as_view()
+#register = RegisterView.as_view()
