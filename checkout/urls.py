@@ -9,4 +9,5 @@ urlpatterns = [
 	url(r'^meus-pedidos/$', views.order_list, name='order_list'),
 	url(r'^meus-pedidos/(?P<pk>\d+)/$', views.order_detail, name='order_detail'),
 	url(r'^notificacoes/pagseguro/$', views.pagseguro_notification, name='pagseguro_notification'),
+	url(r'^finalizando/(?P<pk>\d+)/paypal/$', views.paypal_view,name='paypal_view'),
 ]

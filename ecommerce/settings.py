@@ -27,6 +27,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     #bibliotecas
     'widget_tweaks',
+    'paypal.standard.ipn',
     #apps
     'accounts', #aplicação de usuários customizados
     'checkout', #app do carrinho de compras
@@ -161,6 +162,9 @@ MESSAGE_TAGS = {
 PAGSEGURO_TOKEN = 'AD1D8CC3D3AB46DCA50065635FFF5BA0'
 PAGSEGURO_EMAIL = 'rodrigo.aze7@gmail.com'
 PAGSEGURO_SANDBOX = True #A prori, é True para desenvolvimento.
+
+PAYPAL_TEST = True #Ambiente de sandbox
+PAYPAL_EMAIL = 'rodrigo.aze7@gmail.com'
 
 try:
 	from .local_settings import * #importando todo o arquivo do local_settings para sobrescrever este settings. (variavel de ambiente)

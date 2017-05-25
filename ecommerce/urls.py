@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^compras/', include('checkout.urls', namespace='checkout')),
     url(r'^entrar/$', login, {'template_name': 'login.html'}, name='login'),
     url(r'^sair/$', logout, {'next_page': 'index'}, name='logout'),
-    #url(r'^registro/$', views.register, name='register'),
+    url(r'^paypal/', include('paypal.standard.ipn.urls')),
     url(r'^conta/', include('accounts.urls', namespace='accounts')),
     url(r'^admin/', admin.site.urls), 
 ]
