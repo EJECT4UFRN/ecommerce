@@ -158,6 +158,10 @@ MESSAGE_TAGS = {
     messages_constants.ERROR: 'danger', #Colocamos danger, devido a uma div do bootstrap
 }
 
+PAGSEGURO_TOKEN = 'AD1D8CC3D3AB46DCA50065635FFF5BA0'
+PAGSEGURO_EMAIL = 'rodrigo.aze7@gmail.com'
+PAGSEGURO_SANDBOX = True #A prori, é True para desenvolvimento.
+
 try:
 	from .local_settings import * #importando todo o arquivo do local_settings para sobrescrever este settings. (variavel de ambiente)
 except ImportError:
